@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Session lens · Codex event viewer</title><link rel="stylesheet" href="/styles.css"><script src="/app.js" defer></script></head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <a class="brand" href="/"><span class="brand-icon">◈</span><span>session<span class="brand-light">lens</span><small>CODEX SESSION EXPLORER</small></span></a>
+  <div class="library-heading"><span>YOUR LIBRARY</span><span id="session-count" class="count">0</span></div>
+  <button id="flagged-library" class="flagged-library" aria-pressed="false">⚑ Flagged events <span id="flag-total" class="count">0</span></button>
+  <nav id="sessions" aria-label="Sessions"><p class="muted">Loading sessions…</p></nav>
+  <div class="sidebar-bottom"><button id="import" class="import-button"><span>＋</span> Import session <span class="file-extension">.jsonl</span></button><input id="file" type="file" accept=".jsonl,.json" hidden><div class="local-status"><i></i> Local files · stays on your machine</div></div>
+</aside>
+<main>
+  <header class="topbar"><div class="breadcrumbs">Workspace <span>/</span> <strong>Session explorer</strong></div><button class="quiet-button" id="refresh" title="Reload session snapshots">↻ <span>Refresh</span></button></header>
+  <section class="session-heading"><div class="eyebrow">A CLOSER LOOK AT YOUR AGENT</div><h1 id="title">Explore the work behind the answer.</h1><div id="session-meta" class="session-meta">Select a session to get started.</div><div id="stats" class="stats"></div></section>
+  <section class="explorer">
+    <div class="explorer-toolbar"><div class="section-label">Event timeline <span id="event-count" class="count">0</span></div><div class="toolbar-actions"><label class="search"><span>⌕</span><input id="search" placeholder="Search event text…" aria-label="Search event text"><kbd>/</kbd></label></div></div>
+    <div class="filterbar" id="filters" aria-label="Filter events"></div>
+    <div class="panes">
+      <section class="timeline" aria-label="Event timeline"><div class="list-heading"><span>EVENT / SOURCE LINE</span><span>LOCAL TIME</span></div><div id="events" role="listbox" aria-label="Events" tabindex="0"></div><div id="list-footer" class="list-footer">Every record, in source order.</div></section>
+      <section class="inspector" aria-label="Event details"><div id="detail-head" class="detail-head"><span class="eyebrow">EVENT INSPECTOR</span></div><div class="detail-toolbar"><div class="tabs" role="tablist"><button id="readable-tab" role="tab" aria-selected="true">Readable</button><button id="raw-tab" role="tab" aria-selected="false">Raw JSON</button></div><div class="inspector-actions"><button id="flag-event" class="flag-button" aria-pressed="false" disabled>⚑ Flag event</button><button id="copy" class="quiet-button" title="Copy current view">Copy</button></div></div><div id="inspector-scroll" class="inspector-scroll"><div id="review-note" class="review-note" hidden><label for="flag-note">REVIEW NOTE <span>Optional · why revisit this event?</span></label><textarea id="flag-note" maxlength="10000" rows="3" placeholder="What looks wrong? What evidence should we check?"></textarea><div class="note-actions"><span id="note-status" role="status">Saved locally</span><button id="save-note" class="flag-button">Save note</button></div></div><div id="details" class="details"><div class="empty"><span>◈</span><h2>Follow the sequence.</h2><p>Select any event to see what happened.</p></div></div></div><div class="detail-footer"><span id="source-location">Original records preserved</span><div><button id="previous" aria-label="Previous event" title="Previous event (k)">↑</button><button id="next" aria-label="Next event" title="Next event (j)">↓</button></div></div></section>
+    </div>
+  </section>
+  <footer class="app-footer"><span><span class="footer-mark">◈</span> A little clarity, one event at a time.</span><span><kbd>j</kbd> <kbd>k</kbd> navigate <span class="footer-divider">·</span> <kbd>/</kbd> search</span></footer>
+</main>
+</div><div id="toast" role="status" hidden></div>
+</body></html>

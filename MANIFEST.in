@@ -1,0 +1,10 @@
+include LICENSE README.md CHANGELOG.md CONTRIBUTING.md server.py
+recursive-include src/session_lens/static *.html *.css *.js
+recursive-include src/session_lens/examples *.jsonl
+recursive-include tests *.py *.cjs
+prune data
+prune .agents
+prune .aws
+prune .codex
+global-exclude __pycache__ *.py[cod] *.sqlite* .DS_Store
+recursive-include scripts *.py

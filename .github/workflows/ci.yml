@@ -1,0 +1,49 @@
+name: Checks
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  tests:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        python: ['3.10', '3.12', '3.13']
+        include:
+          - os: windows-latest
+            python: '3.12'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: python -m pip install -e .
+      - run: python -m unittest discover -s tests -v
+      - run: node --check src/session_lens/static/app.js
+      - run: node tests/test_review.cjs
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install build
+      - run: python -m build
+      - run: |
+          python -m venv .venv-smoke
+          .venv-smoke/bin/python -m pip install --no-deps dist/*.whl
+          .venv-smoke/bin/python -I scripts/smoke_install.py
+          .venv-smoke/bin/session-lens --version
+      - run: python scripts/check_archives.py dist
+      - uses: actions/upload-artifact@v4
+        with:
+          name: distributions
+          path: dist/*

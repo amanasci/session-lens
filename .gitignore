@@ -1,0 +1,33 @@
+# Private session snapshots and review databases (never commit these).
+/data/
+*.jsonl
+!src/session_lens/examples/demo.jsonl
+*.sqlite*
+*.db
+.env
+.env.*
+!.env.example
+
+# Local agent configuration and credentials.
+.agents/
+.codex/
+.aws/
+
+# Python environments and generated distribution files.
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+build/
+dist/
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Editors and operating systems.
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+.venv-*/

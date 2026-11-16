@@ -1,0 +1,14 @@
+{"timestamp": "2026-01-01T10:00:00Z", "type": "session_meta", "payload": {"id": "synthetic-demo", "timestamp": "2026-01-01T10:00:00Z", "cwd": "/example/project", "cli_version": "synthetic"}}
+{"timestamp": "2026-01-01T10:00:01Z", "type": "event_msg", "payload": {"type": "task_started", "turn_id": "demo-turn"}}
+{"timestamp": "2026-01-01T10:00:02Z", "type": "turn_context", "payload": {"model": "demo-model", "turn_id": "demo-turn"}}
+{"timestamp": "2026-01-01T10:00:03Z", "type": "response_item", "payload": {"type": "message", "role": "user", "content": [{"type": "input_text", "text": "Synthetic demo: fix the add() function so the test passes."}]}}
+{"timestamp": "2026-01-01T10:00:04Z", "type": "response_item", "payload": {"type": "message", "role": "assistant", "phase": "commentary", "content": [{"type": "output_text", "text": "I will reproduce the failing test, update the function, and rerun the test."}]}}
+{"timestamp": "2026-01-01T10:00:05Z", "type": "response_item", "payload": {"type": "function_call", "name": "exec_command", "call_id": "demo-test-1", "arguments": "{\"cmd\": \"python -m unittest test_math\"}"}}
+{"timestamp": "2026-01-01T10:00:06Z", "type": "response_item", "payload": {"type": "function_call_output", "call_id": "demo-test-1", "output": "FAIL: test_add\nAssertionError: add(2, 3) returned -1; expected 5\nExit code: 1"}}
+{"timestamp": "2026-01-01T10:00:07Z", "type": "response_item", "payload": {"type": "reasoning", "summary": [{"type": "summary_text", "text": "The function subtracts its arguments. Change the operator to addition."}]}}
+{"timestamp": "2026-01-01T10:00:08Z", "type": "response_item", "payload": {"type": "custom_tool_call", "name": "apply_patch", "call_id": "demo-patch", "input": "*** Begin Patch\n*** Update File: math_utils.py\n@@\n-    return a - b\n+    return a + b\n*** End Patch"}}
+{"timestamp": "2026-01-01T10:00:09Z", "type": "response_item", "payload": {"type": "custom_tool_call_output", "call_id": "demo-patch", "output": "Updated math_utils.py"}}
+{"timestamp": "2026-01-01T10:00:10Z", "type": "response_item", "payload": {"type": "function_call", "name": "exec_command", "call_id": "demo-test-2", "arguments": "{\"cmd\": \"python -m unittest test_math\"}"}}
+{"timestamp": "2026-01-01T10:00:11Z", "type": "response_item", "payload": {"type": "function_call_output", "call_id": "demo-test-2", "output": "Ran 1 test\nOK\nExit code: 0"}}
+{"timestamp": "2026-01-01T10:00:12Z", "type": "response_item", "payload": {"type": "message", "role": "assistant", "phase": "final_answer", "content": [{"type": "output_text", "text": "Fixed add() to add both arguments. The test now passes. This session is fabricated for demonstration; no commands were executed."}]}}
+{"timestamp": "2026-01-01T10:00:13Z", "type": "event_msg", "payload": {"type": "task_complete", "turn_id": "demo-turn"}}
